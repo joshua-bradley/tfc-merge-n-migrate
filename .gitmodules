@@ -1,1 +1,4 @@
 
+[submodule "mono-repo/local-modules/demo-aws-asg"]
+	path = mono-repo/local-modules/demo-aws-asg
+	url = https://github.com/joshua-bradley/demo-aws-asg.git
