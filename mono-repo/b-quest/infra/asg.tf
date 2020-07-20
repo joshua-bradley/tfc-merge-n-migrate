@@ -18,5 +18,5 @@ module "asg" {
   #lc specific parameters
   associate_public_ip_address = true
   instance_type = t3.micro
-  key_name = ""
+  key_name = "hc-jb-2020"
 }
