@@ -19,3 +19,7 @@ module "vpc" {
 
   tags = var.standard_tags
 }
+
+module "asg" {
+  module.vpc.public_subnets
+}
