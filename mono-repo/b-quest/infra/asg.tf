@@ -8,7 +8,7 @@ module "asg" {
   # asg specific paramters
   max_size            = 1
   min_size            = 1
-  desired_capcaity    = 1
+  desired_capacity    = 1
   health_check_type   = "EC2"
   vpc_zone_identifier = module.vpc.public_subnets
   tags_as_map = {
