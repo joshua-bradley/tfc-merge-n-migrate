@@ -1,7 +1,7 @@
 module "asg" {
 
   source  = "app.terraform.io/jb-io/asg/aws//modules"
-  version = "1.0.6"
+  version = "1.0.7"
 
   prefix = "hc-jb-asg-test"
 
