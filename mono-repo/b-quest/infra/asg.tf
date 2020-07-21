@@ -1,5 +1,5 @@
 module "asg" {
-  source = "git@github.com:joshua-bradley/tfc-merge-n-migrate/local-modules/demo-aws-asg/module"
+  source = "github.com/joshua-bradley/tfc-merge-n-migrate/local-modules/demo-aws-asg/module"
 
   prefix = "hc-jb-asg-test"
 
