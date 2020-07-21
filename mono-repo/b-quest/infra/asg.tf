@@ -21,5 +21,5 @@ module "asg" {
   associate_public_ip_address = true
   instance_type               = "t3.micro"
   key_name                    = "hc-jb-2020"
-  security_groups             = ["hc-jb-asg-test"]
+  security_groups             = ["sg-0c33716a4ad1d97b0"]
 }
