@@ -1,5 +1,5 @@
 module "asg" {
-  source = "github.com/joshua-bradley/demo-aws-asg//module"
+  source = "joshua-bradley/demo-aws-asg//module"
 
   prefix = "hc-jb-asg-test"
 
