@@ -1,5 +1,5 @@
 module "asg" {
-  source = "../local-modules/demo-aws-asg"
+  source = "../../local-modules/demo-aws-asg/module"
 
   prefix = "hc-jb-asg-test"
 
@@ -10,7 +10,7 @@ module "asg" {
   health_check_type   = "EC2"
   vpc_zone_identifier = module.vpc.public_subnets
   tags_as_map = {
-    "Name"  = "hc-josh-ent-hashicat-instance"
+    "Name"  = "hc-josh-asg"
     "owner" = "hc-joshua"
     "TTL"   = "24"
   }
