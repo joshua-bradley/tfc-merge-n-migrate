@@ -5,4 +5,4 @@ Automating the merging and moving of tfc workspaces
 
 ### **Requirements**
 
-- [ ] terraform-oss >= 0.12
+- [ ] `terraform`-oss >= 0.12
