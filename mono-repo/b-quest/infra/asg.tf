@@ -6,9 +6,9 @@ module "asg" {
   prefix = "hc-jb-asg-test"
 
   # asg specific paramters
-  max_size            = 1
+  max_size            = 3
   min_size            = 1
-  desired_capacity    = 1
+  desired_capacity    = 2
   health_check_type   = "EC2"
   vpc_zone_identifier = module.vpc.public_subnets
   tags_as_map = {
@@ -21,4 +21,5 @@ module "asg" {
   associate_public_ip_address = true
   instance_type               = "t3.micro"
   key_name                    = "hc-jb-2020"
+  security_groups             = ["hc-jb-asg-test"]
 }
