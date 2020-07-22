@@ -14,7 +14,7 @@ module "asg" {
   tags_as_map = {
     "Name"  = "hc-josh-asg"
     "owner" = "hc-joshua"
-    "TTL"   = "24"
+    "TTL"   = "-1"
   }
 
   #lc specific parameters
