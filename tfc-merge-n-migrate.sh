@@ -114,9 +114,19 @@ function build_combined_workspace() {
             # echo "${tf_files}"
             filename="${tf_files##*/}"
             log_info "copying ${filename} to new repo"
-            if [[ -f test/"${filename}" ]]; then
+            i="0"
+            while [[ -f test/"${filename}" ]]; do
+                i=$((i + 1))
+                filename="${filename%.*}-${i}.tf"
                 echo "file already exists in target repo"
-            else
+                # cp "${tf_files%\/*}/${filename}" test/
+                if ! [[ -f test/"${filename}" ]]; then
+                    echo "rename to ${filename}"
+                    cp "${tf_files}" test/"${filename}"
+                    filename=""
+                fi
+            done
+            if [ $i = 0 ]; then
                 cp "${tf_files}" test/
             fi
         done
