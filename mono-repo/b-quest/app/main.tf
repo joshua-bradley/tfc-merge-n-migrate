@@ -8,7 +8,7 @@ resource aws_vpc "hashiapp" {
   enable_dns_hostnames = true
 
   tags = {
-    name = "${var.prefix}-vpc"
+    name = "${var.app-pre}-vpc"
   }
 }
 
@@ -17,12 +17,12 @@ resource aws_subnet "hashiapp" {
   cidr_block = var.subnet_prefix
 
   tags = {
-    name = "${var.prefix}-subnet"
+    name = "${var.app-pre}-subnet"
   }
 }
 
 resource aws_security_group "hashiapp" {
-  name = "${var.prefix}-security-group"
+  name = "${var.app-pre}-security-group"
 
   vpc_id = aws_vpc.hashiapp.id
 
@@ -48,20 +48,20 @@ resource aws_security_group "hashiapp" {
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
-    prefix_list_ids = []
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    app-pre_list_ids = []
   }
 
   tags = {
-    Name = "${var.prefix}-security-group"
+    Name = "${var.app-pre}-security-group"
   }
 }
 
 resource random_id "app-server-id" {
-  prefix      = "${var.prefix}-hashiapp-"
+  app-pre     = "${var.app-pre}-hashiapp-"
   byte_length = 8
 }
 
@@ -69,7 +69,7 @@ resource aws_internet_gateway "hashiapp" {
   vpc_id = aws_vpc.hashiapp.id
 
   tags = {
-    Name = "${var.prefix}-internet-gateway"
+    Name = "${var.app-pre}-internet-gateway"
   }
 }
 
@@ -129,7 +129,7 @@ resource aws_instance "hashiapp" {
   vpc_security_group_ids      = [aws_security_group.hashiapp.id]
 
   tags = {
-    Name  = "${var.prefix}-hashiapp-instance"
+    Name  = "${var.app-pre}-hashiapp-instance"
     ttl   = "-1"
     Owner = "jbradley@hashicorp.com"
   }
@@ -176,7 +176,7 @@ resource "null_resource" "configure-cat-app" {
       "sudo systemctl start apache2",
       "sudo chown -R ubuntu:ubuntu /var/www/html",
       "chmod +x *.sh",
-      "PLACEHOLDER=${var.placeholder} WIDTH=${var.width} HEIGHT=${var.height} PREFIX=${var.prefix} ./deploy_app.sh",
+      "PLACEHOLDER=${var.placeholder} WIDTH=${var.width} HEIGHT=${var.height} PREFIX=${var.app-pre} ./deploy_app.sh",
     ]
 
     connection {
@@ -193,7 +193,7 @@ resource tls_private_key "hashiapp" {
 }
 
 locals {
-  private_key_filename = "${var.prefix}-ssh-key.pem"
+  private_key_filename = "${var.app-pre}-ssh-key.pem"
 }
 
 resource aws_key_pair "hashiapp" {

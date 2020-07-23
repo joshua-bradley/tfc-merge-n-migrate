@@ -10,8 +10,8 @@ variable "instance_count" {
   default     = 3
 }
 
-variable "prefix" {
-  description = "This prefix will be included in the name of most resources."
+variable "app-pre" {
+  description = "This app-pre will be included in the name of most resources."
 }
 
 variable "region" {
