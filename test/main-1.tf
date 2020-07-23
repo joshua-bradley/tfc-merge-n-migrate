@@ -1,7 +1,7 @@
-provider "aws" {
-  version = "~> 2.0"
-  region  = var.region
-}
+# provider "aws" {
+#   version = "~> 2.0"
+#   region  = var.region
+# }
 
 resource aws_vpc "hashiapp" {
   cidr_block           = var.address_space
