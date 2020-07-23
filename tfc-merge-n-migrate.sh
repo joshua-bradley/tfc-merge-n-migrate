@@ -99,12 +99,29 @@ function merge_state() {
         # cd $PWD/$repo
         for resource in $(terraform state list -state=${repo_name}.tfstate.bak); do
             echo -e "${resource}"
-            terraform state mv -state="${PWD}/${repo_name}.tfstate.bak" -state-out="${PWD}/merged.tfstste" $resource $resource
+            terraform state mv -state="${PWD}/${repo_name}.tfstate.bak" -state-out="${PWD}/merged.tfstate" $resource $resource
         done
         # terraform state mv -state="${SCRIPT_DIR}/${repo_name}.tfstate.bak" -state-out="${SCRIPT_DIR}" merged.tfstate
         log_info "${repo_name} has been merged to ${SCRIPT_DIR}/merged.tfstate"
         # cd "${SCRIPT_DIR}"
     done
+}
+
+function build_combined_workspace() {
+    for repo in "$@"; do
+        echo "${PWD}"/"${repo}"
+        for tf_files in "${PWD}"/"${repo}"/*.tf; do
+            # echo "${tf_files}"
+            filename="${tf_files##*/}"
+            log_info "copying ${filename} to new repo"
+            if [[ -f test/"${filename}" ]]; then
+                echo "file already exists in target repo"
+            else
+                cp "${tf_files}" test/
+            fi
+        done
+    done
+    mv ${SCRIPT_DIR}/merged.tfstate test/
 }
 
 ###
@@ -115,6 +132,7 @@ function main() {
     # echo "mainline"
     pull_state "$@"
     merge_state "$@"
+    build_combined_workspace "$@"
 }
 
 clear
