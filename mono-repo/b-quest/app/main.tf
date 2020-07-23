@@ -48,11 +48,11 @@ resource aws_security_group "hashiapp" {
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    app-pre_list_ids = []
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+    prefix_list_ids = []
   }
 
   tags = {
@@ -61,7 +61,7 @@ resource aws_security_group "hashiapp" {
 }
 
 resource random_id "app-server-id" {
-  app-pre     = "${var.app-pre}-hashiapp-"
+  prefix      = "${var.app-pre}-hashiapp-"
   byte_length = 8
 }
 
